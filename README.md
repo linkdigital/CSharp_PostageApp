@@ -18,7 +18,8 @@ PostageApp for C# is very easy to use. Here's a simple example:
     PostageApp.PostageApp postageApp = new PostageApp.PostageApp('api_key');
     
     Dictionary<string, string> content = new Dictionary<string, string>();
-    content.Add("text/plain", 'Example Text Content');    content.Add("text/html", 'Example HTML Content');
+    content.Add("text/plain", 'Example Text Content');    
+content.Add("text/html", 'Example HTML Content');
     postageApp.subject("Example Subject");
     postageApp.to("example@email.com");
     
