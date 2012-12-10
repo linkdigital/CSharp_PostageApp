@@ -21,8 +21,8 @@ PostageApp for C# is very easy to use. Here's a simple example:
     content.Add("text/plain", 'Example Text Content');    
 
     postageApp.subject("Example Subject");
-    postageApp.to("example@email.com");
-    postageApp.from("example@email.com");
+    postageApp.to("recipient@example.com");
+    postageApp.from("sender@example.com");
     postageApp.message(content);   
 	 
     PostageApp.Response response = postageApp.send(); # returns Response object
@@ -41,11 +41,11 @@ You can set headers all in one go:
     
 Recipients can be specified in a number of ways. Here's how you define a single recipient:
 
-    postageApp.to("example@email.com");
+    postageApp.to("recipient@example.com");
 
 Here's how you define a list of them who can see each others email addresses:
 
-    postageApp.to("example@email.com, example2@email.com");
+    postageApp.to("recipient1@example.com, recipient2@example.com");
 
 Here's how you define a list of them who can't see each others emails addresses:
 
@@ -56,15 +56,27 @@ Here's how you define a list of them who can't see each others emails addresses:
 Here's how you define a list of them with variables attached:
 
     Dictionary<string, Dictionary<string, string>> recipients = new Dictionary<string, Dictionary<string, string>>();
-    recipients.Add("recipient1@example.com", new Dictionary<string, string>(){{"variable_1", "value"},{"variable_2", "value"} });
-    recipients.Add("recipient2@example.com", new Dictionary<string, string>() { { "variable_1", "value" }, { "variable_2", "value" } });
+    recipients.Add("recipient1@example.com", new Dictionary<string, string>(){ {"variable_1", "value"},{"variable_2", "value"} });
+    recipients.Add("recipient2@example.com", new Dictionary<string, string>(){ {"variable_1", "value"},{"variable_2", "value"} });
     
 For more information about formatting of recipients, templates and variables please see [documentation](http://help.postageapp.com/faqs)
     
 ### Recipient Override
 Heres's how to override the recipient:
 
-    postageApp.recipient_override = "example@email.com";
+    postageApp.recipient_override = "recipient@example.com";
+
+### Expose JSON Request
+Heres's how to show the actual JSON being sent to the API:
+
+    Console.WriteLine("request json: " + postageApp.showRequest());
+
+### Reponse Object
+Heres's how to use the response object, see the documentation for what data is returned in each request:
+
+    PostageApp.Response response = postageApp.send(); # returns Response object
+	Console.WriteLine("status: " + response.status);
+	Console.WriteLine("uid: " + response.uid);
 
 Other Usage
 -----------
