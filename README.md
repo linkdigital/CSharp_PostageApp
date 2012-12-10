@@ -9,25 +9,22 @@ All documented API functions have been added. See the API Documentation for more
 
 Installation
 ------------
- - Copy both `system/application/config/postageapp.php` and `system/application/libraries/PostageApp.php`
- - Edit `config/postageapp.php` to include your PostageApp Project API key.
+ - Copy `bin/PostageApp.dll` to your project's bin folder and add a reference to the library.
 
 Email Usage
 -----------
-PostageApp for CodeIgniter works very similarly to built-in Email class. Here's a simple example:
+PostageApp for C# is very easy to use. Here's a simple example:
 
-    $this->load->library('postageapp');
+    PostageApp.PostageApp postageApp = new PostageApp.PostageApp('api_key');
     
-    $this->postageapp->from('sender@test.test');
-    $this->postageapp->to('recipient@test.test');
-    $this->postageapp->subject('Example Email');
-    $this->postageapp->message('Example Message');
-    $this->postageapp->attach('/path/to/a/file.ext');
+    Dictionary<string, string> content = new Dictionary<string, string>();
+    content.Add("text/plain", 'Example Text Content');    content.Add("text/html", 'Example HTML Content');
+    postageApp.subject("Example Subject");
+    postageApp.to("example@email.com");
     
-    $this->postageapp->template('test-template');
-    $this->postageapp->variables(array('variable' => 'value'));
-    
-    $this->postageapp->send(); # returns JSON response from the server
+    postageApp.from("example@email.com");
+    postageApp.message(content);    
+    PostageApp.Response response = postageApp.send(); # returns JSON response from the server
 
 If you wish to send both html and plain text parts call message function like this:
     
