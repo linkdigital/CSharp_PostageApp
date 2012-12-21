@@ -389,7 +389,7 @@ namespace PostageApp
             StreamWriter paStream = null;
 
             HttpWebRequest paRequest = (HttpWebRequest)WebRequest.Create(uri);
-            paRequest.ContentLength = content.Length;
+            paRequest.ContentLength = Encoding.UTF8.GetByteCount(content);
             paRequest.ContentType = "application/json";
             paRequest.UserAgent = "POSTAGEAPP-C# " + version; 
             paRequest.Method = "POST";
